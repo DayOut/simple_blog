@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+        <div class="row asaaa">
+            <div class="post ">
+
+                <div class="row title">
+                    <h3>{{ post.title }}</h3> <small>[<a href="{{ path('post_form', {'id':post.id}) }}">Редактировать</a>}</small>
+                </div>
+                <div class="row article">
+                    {{ post.article|nl2br }}
+                </div>
+                <div class="row">
+                    <!--<a href="{{ path('homepage') }}">На главную</a>-->
+                    &nbsp
+
+                </div>
+                <div class="row spacing">&nbsp</div>
+
+                <!-- Form begin-->
+                    <div class="row">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                        {{ form_end(form) }}
+                    </div>
+                <!-- Form end-->
+                <!-- Comments begin-->
+                <div class="row spacing">&nbsp</div>
+                {% if post.comments.count != 0 %}
+                <div class="row">
+                    <div class="col-10"><h5>Комментарии:</h5>
+                        {% for comment in post.comments | reverse %}
+                            <div class="row">
+                                <div class="col-12">
+
+                                <div class="row"><strong>{{ comment.nickname }} &#9; </strong><small>({{ comment.date|date("h:i m/d/y ")}})</small></div>
+                                <div class="row">
+                                    <div class="col-1"></div>{{ comment.body|nl2br }}
+                                </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row spacing">&nbsp</div>
+                        {% endfor %}
+
+                    </div>
+
+
+                </div>
+                {% endif %}
+                <!-- Comments end-->
+
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
